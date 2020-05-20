@@ -1,0 +1,13 @@
+D:\工作管理\软件开发\VS2017\ftp_cli1\ftp_cli1\bin\Debug\ftp_cli1.exe.config
+D:\工作管理\软件开发\VS2017\ftp_cli1\ftp_cli1\bin\Debug\ftp_cli1.exe
+D:\工作管理\软件开发\VS2017\ftp_cli1\ftp_cli1\bin\Debug\ftp_cli1.pdb
+D:\工作管理\软件开发\VS2017\ftp_cli1\ftp_cli1\bin\Debug\ftp_cli1.xml
+D:\工作管理\软件开发\VS2017\ftp_cli1\ftp_cli1\obj\Debug\ftp_cli.Form1.resources
+D:\工作管理\软件开发\VS2017\ftp_cli1\ftp_cli1\obj\Debug\ftp_cli.Resources.resources
+D:\工作管理\软件开发\VS2017\ftp_cli1\ftp_cli1\obj\Debug\ftp_cli1.vbproj.GenerateResource.cache
+D:\工作管理\软件开发\VS2017\ftp_cli1\ftp_cli1\obj\Debug\ftp_cli1.vbproj.CoreCompileInputs.cache
+D:\工作管理\软件开发\VS2017\ftp_cli1\ftp_cli1\obj\Debug\ftp_cli1.exe
+D:\工作管理\软件开发\VS2017\ftp_cli1\ftp_cli1\obj\Debug\ftp_cli1.xml
+D:\工作管理\软件开发\VS2017\ftp_cli1\ftp_cli1\obj\Debug\ftp_cli1.pdb
+D:\工作管理\软件开发\VS2017\ftp_cli1\ftp_cli1\obj\Debug\ftp_cli.Form2.resources
+D:\工作管理\软件开发\VS2017\ftp_cli1\ftp_cli1\obj\Debug\ftp_cli1.vbprojAssemblyReference.cache

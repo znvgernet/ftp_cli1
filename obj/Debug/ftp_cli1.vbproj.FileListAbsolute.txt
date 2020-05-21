@@ -11,3 +11,4 @@ D:\工作管理\软件开发\VS2017\ftp_cli1\ftp_cli1\obj\Debug\ftp_cli1.xml
 D:\工作管理\软件开发\VS2017\ftp_cli1\ftp_cli1\obj\Debug\ftp_cli1.pdb
 D:\工作管理\软件开发\VS2017\ftp_cli1\ftp_cli1\obj\Debug\ftp_cli.Form2.resources
 D:\工作管理\软件开发\VS2017\ftp_cli1\ftp_cli1\obj\Debug\ftp_cli1.vbprojAssemblyReference.cache
+D:\工作管理\软件开发\VS2017\ftp_cli1\ftp_cli1\obj\Debug\ftp_cli.Form3.resources

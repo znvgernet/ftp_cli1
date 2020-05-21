@@ -17,8 +17,14 @@
                 If kip <> "" Then
                     k = Form1.DataGridView1.Rows.Add()
                     Form1.DataGridView1.Rows(k).Cells(0).Value = kip
+                    Form1.DataGridView1.Rows(k).Cells(0).Tag = Fsu_Telnet_Conn_Pass
+
                     Form1.DataGridView1.Rows(k).Cells(1).Value = Fsu_Ftp_Conn_Port
+                    Form1.DataGridView1.Rows(k).Cells(1).Tag = Fsu_Telnet_Conn_Port
+
                     Form1.DataGridView1.Rows(k).Cells(2).Value = Fsu_Ftp_Login_User
+                    Form1.DataGridView1.Rows(k).Cells(2).Tag = Fsu_Telnet_Conn_User
+
                     Form1.DataGridView1.Rows(k).Cells(3).Value = "".PadLeft(8, "*")
                     Form1.DataGridView1.Rows(k).Cells(3).Tag = Fsu_Ftp_login_Pass
                 End If

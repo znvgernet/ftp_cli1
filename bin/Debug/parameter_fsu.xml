@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<root>
+  <fsu>
+    <fsu_ftp_parameter>
+      <ftp_port>21</ftp_port>
+      <ftp_login_user>root</ftp_login_user>
+      <ftp_login_pass>gVQn0hfaXEw=</ftp_login_pass>
+    </fsu_ftp_parameter>
+    <fsu_telnet_parameter>
+      <telnet_port>23</telnet_port>
+      <telnet_login_user>root</telnet_login_user>
+      <telnet_login_pass>NY7g8Vo6DIfwUmIQFhJblA==</telnet_login_pass>
+    </fsu_telnet_parameter>
+  </fsu>
+</root>

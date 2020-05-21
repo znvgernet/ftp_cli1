@@ -8,6 +8,9 @@ Imports System.Threading.Thread
 
 Public Class Form1
     Public Thread_Total_count As Integer = 5
+    Public StopFlag As Boolean = False
+    Public telnet_tc As TcpClient
+    Public input_str As String = ""
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
         '10.72.76.59  "BeiJing", "BeiJing@zxm10", 6521
@@ -20,41 +23,41 @@ Public Class Form1
         Try
 
             If (ftpClient.Login() = True) Then
-            'ftpClient.ChangeDirectory("/北京_xxx项目_资料备份/01业务程序安装包备份_202005")
+                'ftpClient.ChangeDirectory("/北京_xxx项目_资料备份/01业务程序安装包备份_202005")
 
-            ftpClient.GetFileList("")
-            '创建一个新文件夹
-            'ftpClient.CreateDirectory("FTPFOLDERNEW")
+                ftpClient.GetFileList("")
+                '创建一个新文件夹
+                'ftpClient.CreateDirectory("FTPFOLDERNEW")
 
-            '将新的文件夹设置为活动文件夹。
-            'ftpClient.ChangeDirectory("FTPFOLDERNEW")
+                '将新的文件夹设置为活动文件夹。
+                'ftpClient.ChangeDirectory("FTPFOLDERNEW")
 
-            '设置FTP模式
-            'ftpClient.SetBinaryMode(True)
+                '设置FTP模式
+                'ftpClient.SetBinaryMode(True)
 
-            '从你的硬盘上上载一个文件到FTP网页
-            'ftpClient.UploadFile(str_file_path)
+                '从你的硬盘上上载一个文件到FTP网页
+                'ftpClient.UploadFile(str_file_path)
 
-            '获得刚刚上传的文件的大小
-            'Dim lng_filesize As Long
-            'lng_filesize = ftpClient.GetFileSize(str_filename)
+                '获得刚刚上传的文件的大小
+                'Dim lng_filesize As Long
+                'lng_filesize = ftpClient.GetFileSize(str_filename)
 
-            'If lng_filesize = MyFileSize Then
-            'MsgBox("成功上传文件" & str_filename & " 文件大小" & lng_filesize)
-            'Else
-            'MsgBox("上传失败")
-            'End If
+                'If lng_filesize = MyFileSize Then
+                'MsgBox("成功上传文件" & str_filename & " 文件大小" & lng_filesize)
+                'Else
+                'MsgBox("上传失败")
+                'End If
 
-            '对上载文件重命名
-            'ftpClient.RenameFile("SampleFile.xml", "SampleFile_new.xml")
+                '对上载文件重命名
+                'ftpClient.RenameFile("SampleFile.xml", "SampleFile_new.xml")
 
-            '删除一个文件
-            'ftpClient.DeleteFile("/北京_xxx项目_资料备份/hello")
+                '删除一个文件
+                'ftpClient.DeleteFile("/北京_xxx项目_资料备份/hello")
 
-            '总是关闭链接，确保没有任何不在使用中的FTP链接
-            '检查你是否登录到FTP服务器，并且接着关闭链接
-            ftpClient.CloseConnection()
-        End If
+                '总是关闭链接，确保没有任何不在使用中的FTP链接
+                '检查你是否登录到FTP服务器，并且接着关闭链接
+                ftpClient.CloseConnection()
+            End If
             'MsgBox("执行完毕！")
 
         Catch ex As Exception
@@ -66,7 +69,7 @@ Public Class Form1
         '允许线程中访问界面控件
         Form.CheckForIllegalCrossThreadCalls = False
         '设置dock
-        Panel1.Height = Me.ToolStrip1.Height
+        Panel1.Height = Me.ToolStrip1.Height + 5
         TabControl1.Dock = DockStyle.Fill
 
         SplitContainer3.Dock = DockStyle.Fill
@@ -90,6 +93,21 @@ Public Class Form1
 
         '设置大小与位置
         Setcontrolsize()
+
+        If Check_file_isexist(parameter_xml_file) Then
+            get_parameter_from_xml(parameter_xml_file)
+        Else
+            Fsu_Ftp_Login_User = "root"
+            Fsu_Ftp_login_Pass = "lwdhcp"
+            Fsu_Ftp_Conn_Port = 21
+
+            Fsu_Telnet_Conn_Port = 23
+            Fsu_Telnet_Conn_User = "root"
+            Fsu_Telnet_Conn_Pass = "netviewu"
+
+            Create_xml_fsu_parameter(parameter_xml_file)
+        End If
+
     End Sub
 
     Private Sub Form1_Resize(sender As Object, e As EventArgs) Handles Me.Resize
@@ -123,6 +141,14 @@ Public Class Form1
         Clear_fsu_ip_list()
     End Sub
 
+    Private Sub ToolStripButton3_Click(sender As Object, e As EventArgs) Handles ToolStripButton3.Click
+        If MsgBox("是否确定删除主机列表中FSU的历史告警库文件？", vbOKCancel + vbQuestion, "确定") = vbOK Then
+            Dim m_thread As New Thread(AddressOf Del_his_alarmdb_from_fsu)
+            m_thread.Start()
+            'Del_his_alarmdb_from_fsu()
+        End If
+    End Sub
+
     Private Sub ToolStripButton4_Click(sender As Object, e As EventArgs) Handles ToolStripButton4.Click
         Choose_update_file()
     End Sub
@@ -137,16 +163,13 @@ Public Class Form1
             m_thread.Start()
             'Update_file_to_fsu()
         End If
-
     End Sub
 
-    Private Sub ToolStripButton3_Click(sender As Object, e As EventArgs) Handles ToolStripButton3.Click
-        If MsgBox("是否确定删除主机列表中FSU的历史告警库文件？", vbOKCancel + vbQuestion, "确定") = vbOK Then
-            Dim m_thread As New Thread(AddressOf Del_his_alarmdb_from_fsu)
+    Private Sub ToolStripButton7_Click(sender As Object, e As EventArgs) Handles ToolStripButton7.Click
+        If MsgBox("是否确定将列表中的所有FSU都重新启动？", vbOKCancel + vbQuestion, "确定") = vbOK Then
+            Dim m_thread As New Thread(AddressOf Reboot_fsu_1)
             m_thread.Start()
-            'Del_his_alarmdb_from_fsu()
         End If
-
     End Sub
 
     Public Sub Clear_fsu_ip_list()
@@ -226,8 +249,22 @@ Public Class Form1
         ToolStripButton4.Enabled = flg
         ToolStripButton5.Enabled = flg
         ToolStripButton6.Enabled = flg
+        ToolStripButton7.Enabled = flg
 
         配置选项ToolStripMenuItem.Enabled = flg
+
+        Select Case flg
+            Case True
+                DataGridView1.Columns(0).SortMode = DataGridViewColumnSortMode.Automatic
+
+                DataGridView2.Columns(0).SortMode = DataGridViewColumnSortMode.Automatic
+                DataGridView2.Columns(1).SortMode = DataGridViewColumnSortMode.Automatic
+            Case False
+                DataGridView1.Columns(0).SortMode = DataGridViewColumnSortMode.NotSortable
+
+                DataGridView2.Columns(0).SortMode = DataGridViewColumnSortMode.NotSortable
+                DataGridView2.Columns(1).SortMode = DataGridViewColumnSortMode.NotSortable
+        End Select
     End Sub
 
     Public Sub Del_his_alarmdb_from_fsu()
@@ -238,6 +275,7 @@ Public Class Form1
         Set_control_status(False)
         DataGridView5.Rows.Clear()
         TextBox1.Text = ""
+        TextBox8.Text = ""
         For i As Integer = 0 To DataGridView1.Rows.Count - 1
             DataGridView1.Rows(i).Cells(4).Value = ""
         Next
@@ -279,6 +317,7 @@ Public Class Form1
         End If
         Set_control_status(False)
         DataGridView5.Rows.Clear()
+        TextBox8.Text = ""
         TextBox1.Text = ""
         For i As Integer = 0 To DataGridView1.Rows.Count - 1
             DataGridView1.Rows(i).Cells(4).Value = ""
@@ -376,7 +415,165 @@ Public Class Form1
         Next
     End Sub
 
-    Private Sub ToolStripButton7_Click(sender As Object, e As EventArgs) Handles ToolStripButton7.Click
+    Public Sub Reboot_fsu_1()
+        If DataGridView1.Rows.Count <= 0 Then
+            MsgBox("FSU主机地址列表不能为空", vbExclamation + vbOKOnly, "条件不足")
+            Exit Sub
+        End If
+        Set_control_status(False)
+        DataGridView5.Rows.Clear()
+        TextBox8.Text = ""
+        TextBox1.Text = ""
+        For i As Integer = 0 To DataGridView1.Rows.Count - 1
+            DataGridView1.Rows(i).Cells(4).Value = ""
+        Next
+        For i As Integer = 0 To DataGridView1.Rows.Count - 1
+            Reboot_Fsu(DataGridView1.Rows(i).Cells(0).Value, DataGridView1.Rows(i).Cells(1).Tag, DataGridView1.Rows(i).Cells(2).Tag, DataGridView1.Rows(i).Cells(0).Tag)
+        Next
+        Set_control_status(True)
+    End Sub
 
+    Public Sub Reboot_Fsu(ByVal hostip As String, ByVal hostport As Integer, ByVal login_user As String, ByVal login_pass As String)
+        Dim tc As New TcpClient
+        Try
+            tc.ReceiveBufferSize = 4095
+            tc.Connect(IPAddress.Parse(hostip), hostport)
+            If tc.Connected Then
+                Dim t As New Thread(AddressOf DataListener)
+                t.Start(tc)
+                Sleep(200)
+                tc.Client.Send(System.Text.Encoding.GetEncoding("gb2312").GetBytes(login_user & vbCrLf))
+                Sleep(200)
+                tc.Client.Send(System.Text.Encoding.GetEncoding("gb2312").GetBytes(login_pass & vbCrLf))
+                Sleep(200)
+                tc.Client.Send(System.Text.Encoding.GetEncoding("gb2312").GetBytes("reboot" & vbCrLf))
+                Sleep(500)
+                Set_status_info_for_fsu_list(hostip, hostport, login_user, login_pass, "重启成功", 20)
+            End If
+            tc.Client.Close()
+            tc.Close()
+        Catch ex As Exception
+            If tc.Connected Then
+                tc.Close()
+            End If
+            Set_status_info_for_fsu_list(hostip, hostport, login_user, login_pass, ex.Message, 20)
+        End Try
+    End Sub
+
+    Private Sub DataListener(Client As TcpClient)
+        Dim Buffer(4095) As Byte
+        Dim RecLength As Integer = 0
+        Dim str As String = ""
+        Client.ReceiveBufferSize = 4095
+        Try
+            Do Until Not Client.Connected
+                RecLength = Client.Client.Receive(Buffer)
+                Select Case RecLength
+                    Case 0
+                        Exit Do
+                    Case Else
+                        str = Encoding.UTF8.GetString(Buffer, 0, RecLength)
+                        TextBox1.AppendText(str)
+                End Select
+            Loop
+            TextBox1.AppendText(vbCrLf & "Good Bye " & Now & vbCrLf)
+        Catch ex As Exception
+
+        End Try
+    End Sub
+
+    Private Sub DataListener_test_telnet(Client As TcpClient)
+        Dim Buffer(4095) As Byte
+        Dim RecLength As Integer = 0
+        Dim str As String = ""
+        Client.ReceiveBufferSize = 4095
+        Try
+            Do Until Not Client.Connected
+                RecLength = Client.Client.Receive(Buffer)
+                Select Case RecLength
+                    Case 0
+
+                        Exit Do
+                    Case Else
+                        str = Encoding.UTF8.GetString(Buffer, 0, RecLength)
+                        TextBox10.AppendText(str)
+                End Select
+            Loop
+            'Client.Client.Close()
+            'Client.Close()
+            'Client.Dispose()
+            Client = New TcpClient
+            TextBox10.AppendText(vbCrLf & "Good Bye " & Now & vbCrLf)
+        Catch ex As Exception
+            'Client.Dispose()
+        End Try
+    End Sub
+
+    Private Sub TextBox9_TextChanged(sender As Object, e As EventArgs) Handles TextBox9.TextChanged
+        If TextBox9.Text = "" Then
+            TextBox9.Text = "> "
+            TextBox9.SelectionStart = TextBox9.Text.Length
+        ElseIf TextBox9.Text.Length < 2 Then
+            TextBox9.Text = "> "
+            TextBox9.SelectionStart = TextBox9.Text.Length
+        End If
+    End Sub
+
+    Private Sub TextBox9_KeyUp(sender As Object, e As KeyEventArgs) Handles TextBox9.KeyUp
+        TextBox9.SelectionStart = TextBox9.Text.Length
+        If e.KeyCode = 13 Then
+            Test_telnet(TextBox9.Text)
+            TextBox9.Text = "> "
+            TextBox9.SelectionStart = TextBox9.Text.Length
+        Else
+            TextBox9.SelectionStart = TextBox9.Text.Length
+        End If
+
+    End Sub
+
+    Public Sub Test_telnet(ByVal commstr As String)
+        Try
+            If InStr(commstr, "conn") > 0 Then
+                telnet_tc = New TcpClient
+                Dim kl = commstr.Substring(1).Substring(6).Split(",")
+                If UBound(kl) = 1 Then
+                    telnet_tc.Connect(IPAddress.Parse(kl(0)), Int(kl(1)))
+                Else
+                    telnet_tc.Connect(IPAddress.Parse(kl(0)), Fsu_Telnet_Conn_Port)
+                End If
+                'telnet_tc.Connect(IPAddress.Parse(commstr.Substring(1).Substring(6)), Fsu_Telnet_Conn_Port)
+                If telnet_tc.Connected Then
+                    Dim t As New Thread(AddressOf DataListener_test_telnet)
+                    t.Start(telnet_tc)
+                End If
+            Else
+                If telnet_tc.Connected Then
+                    telnet_tc.Client.Send(System.Text.Encoding.GetEncoding("gb2312").GetBytes(commstr.Substring(2) & vbCrLf))
+                End If
+            End If
+        Catch ex As Exception
+            TextBox10.AppendText(ex.Message)
+        End Try
+
+    End Sub
+
+    Private Sub TabControl1_SelectedIndexChanged(sender As Object, e As EventArgs) Handles TabControl1.SelectedIndexChanged
+        If TabControl1.SelectedIndex = 2 Then
+            TextBox9.SelectionStart = TextBox9.Text.Length
+            TextBox9.Focus()
+        End If
+    End Sub
+
+    Private Sub TextBox10_DoubleClick(sender As Object, e As EventArgs) Handles TextBox10.DoubleClick
+        TextBox9.SelectionStart = TextBox9.Text.Length
+        TextBox9.Focus()
+    End Sub
+
+    Private Sub TextBox9_KeyDown(sender As Object, e As KeyEventArgs) Handles TextBox9.KeyDown
+        TextBox9.SelectionStart = TextBox9.Text.Length
+    End Sub
+
+    Private Sub 配置选项ToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles 配置选项ToolStripMenuItem.Click
+        Form3.ShowDialog(Me)
     End Sub
 End Class

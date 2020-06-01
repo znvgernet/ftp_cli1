@@ -47,4 +47,14 @@
             TextBox6.PasswordChar = "*"
         End If
     End Sub
+
+    Private Sub Button4_Click(sender As Object, e As EventArgs) Handles Button4.Click
+        TextBox6.Text = Fsu_Telnet_Conn_Pass_new
+        TextBox3.Text = Fsu_Ftp_login_Pass_new
+    End Sub
+
+    Private Sub Button3_Click(sender As Object, e As EventArgs) Handles Button3.Click
+        TextBox6.Text = "netviewu"
+        TextBox3.Text = "lwdhcp"
+    End Sub
 End Class

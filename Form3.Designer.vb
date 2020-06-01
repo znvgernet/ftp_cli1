@@ -23,25 +23,29 @@ Partial Class Form3
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
-        Me.Label1 = New System.Windows.Forms.Label()
-        Me.TextBox1 = New System.Windows.Forms.TextBox()
-        Me.TextBox2 = New System.Windows.Forms.TextBox()
-        Me.Label2 = New System.Windows.Forms.Label()
-        Me.TextBox3 = New System.Windows.Forms.TextBox()
-        Me.Label3 = New System.Windows.Forms.Label()
         Me.TextBox4 = New System.Windows.Forms.TextBox()
         Me.Label4 = New System.Windows.Forms.Label()
         Me.TextBox5 = New System.Windows.Forms.TextBox()
         Me.Label5 = New System.Windows.Forms.Label()
         Me.TextBox6 = New System.Windows.Forms.TextBox()
         Me.Label6 = New System.Windows.Forms.Label()
+        Me.TextBox3 = New System.Windows.Forms.TextBox()
+        Me.Label3 = New System.Windows.Forms.Label()
+        Me.TextBox2 = New System.Windows.Forms.TextBox()
+        Me.Label2 = New System.Windows.Forms.Label()
+        Me.TextBox1 = New System.Windows.Forms.TextBox()
+        Me.Label1 = New System.Windows.Forms.Label()
         Me.Button1 = New System.Windows.Forms.Button()
         Me.Button2 = New System.Windows.Forms.Button()
+        Me.Button3 = New System.Windows.Forms.Button()
+        Me.Button4 = New System.Windows.Forms.Button()
         Me.GroupBox1.SuspendLayout()
         Me.SuspendLayout()
         '
         'GroupBox1
         '
+        Me.GroupBox1.Controls.Add(Me.Button4)
+        Me.GroupBox1.Controls.Add(Me.Button3)
         Me.GroupBox1.Controls.Add(Me.TextBox4)
         Me.GroupBox1.Controls.Add(Me.Label4)
         Me.GroupBox1.Controls.Add(Me.TextBox5)
@@ -60,55 +64,6 @@ Partial Class Form3
         Me.GroupBox1.TabIndex = 0
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "FSU连接参数"
-        '
-        'Label1
-        '
-        Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(12, 49)
-        Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(61, 15)
-        Me.Label1.TabIndex = 0
-        Me.Label1.Text = "FTP端口"
-        '
-        'TextBox1
-        '
-        Me.TextBox1.Location = New System.Drawing.Point(79, 43)
-        Me.TextBox1.Name = "TextBox1"
-        Me.TextBox1.Size = New System.Drawing.Size(117, 25)
-        Me.TextBox1.TabIndex = 1
-        '
-        'TextBox2
-        '
-        Me.TextBox2.Location = New System.Drawing.Point(79, 83)
-        Me.TextBox2.Name = "TextBox2"
-        Me.TextBox2.Size = New System.Drawing.Size(117, 25)
-        Me.TextBox2.TabIndex = 3
-        '
-        'Label2
-        '
-        Me.Label2.AutoSize = True
-        Me.Label2.Location = New System.Drawing.Point(12, 89)
-        Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(61, 15)
-        Me.Label2.TabIndex = 2
-        Me.Label2.Text = "FTP用户"
-        '
-        'TextBox3
-        '
-        Me.TextBox3.Location = New System.Drawing.Point(79, 124)
-        Me.TextBox3.Name = "TextBox3"
-        Me.TextBox3.PasswordChar = Global.Microsoft.VisualBasic.ChrW(42)
-        Me.TextBox3.Size = New System.Drawing.Size(117, 25)
-        Me.TextBox3.TabIndex = 5
-        '
-        'Label3
-        '
-        Me.Label3.AutoSize = True
-        Me.Label3.Location = New System.Drawing.Point(12, 130)
-        Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(61, 15)
-        Me.Label3.TabIndex = 4
-        Me.Label3.Text = "FTP密码"
         '
         'TextBox4
         '
@@ -159,6 +114,55 @@ Partial Class Form3
         Me.Label6.TabIndex = 6
         Me.Label6.Text = "Telnet端口"
         '
+        'TextBox3
+        '
+        Me.TextBox3.Location = New System.Drawing.Point(79, 124)
+        Me.TextBox3.Name = "TextBox3"
+        Me.TextBox3.PasswordChar = Global.Microsoft.VisualBasic.ChrW(42)
+        Me.TextBox3.Size = New System.Drawing.Size(117, 25)
+        Me.TextBox3.TabIndex = 5
+        '
+        'Label3
+        '
+        Me.Label3.AutoSize = True
+        Me.Label3.Location = New System.Drawing.Point(12, 130)
+        Me.Label3.Name = "Label3"
+        Me.Label3.Size = New System.Drawing.Size(61, 15)
+        Me.Label3.TabIndex = 4
+        Me.Label3.Text = "FTP密码"
+        '
+        'TextBox2
+        '
+        Me.TextBox2.Location = New System.Drawing.Point(79, 83)
+        Me.TextBox2.Name = "TextBox2"
+        Me.TextBox2.Size = New System.Drawing.Size(117, 25)
+        Me.TextBox2.TabIndex = 3
+        '
+        'Label2
+        '
+        Me.Label2.AutoSize = True
+        Me.Label2.Location = New System.Drawing.Point(12, 89)
+        Me.Label2.Name = "Label2"
+        Me.Label2.Size = New System.Drawing.Size(61, 15)
+        Me.Label2.TabIndex = 2
+        Me.Label2.Text = "FTP用户"
+        '
+        'TextBox1
+        '
+        Me.TextBox1.Location = New System.Drawing.Point(79, 43)
+        Me.TextBox1.Name = "TextBox1"
+        Me.TextBox1.Size = New System.Drawing.Size(117, 25)
+        Me.TextBox1.TabIndex = 1
+        '
+        'Label1
+        '
+        Me.Label1.AutoSize = True
+        Me.Label1.Location = New System.Drawing.Point(12, 49)
+        Me.Label1.Name = "Label1"
+        Me.Label1.Size = New System.Drawing.Size(61, 15)
+        Me.Label1.TabIndex = 0
+        Me.Label1.Text = "FTP端口"
+        '
         'Button1
         '
         Me.Button1.Location = New System.Drawing.Point(279, 278)
@@ -176,6 +180,24 @@ Partial Class Form3
         Me.Button2.TabIndex = 2
         Me.Button2.Text = "取消"
         Me.Button2.UseVisualStyleBackColor = True
+        '
+        'Button3
+        '
+        Me.Button3.Location = New System.Drawing.Point(15, 189)
+        Me.Button3.Name = "Button3"
+        Me.Button3.Size = New System.Drawing.Size(181, 34)
+        Me.Button3.TabIndex = 12
+        Me.Button3.Text = "力维原默认密码"
+        Me.Button3.UseVisualStyleBackColor = True
+        '
+        'Button4
+        '
+        Me.Button4.Location = New System.Drawing.Point(240, 189)
+        Me.Button4.Name = "Button4"
+        Me.Button4.Size = New System.Drawing.Size(205, 34)
+        Me.Button4.TabIndex = 13
+        Me.Button4.Text = "移动新标默认密码"
+        Me.Button4.UseVisualStyleBackColor = True
         '
         'Form3
         '
@@ -212,4 +234,6 @@ Partial Class Form3
     Friend WithEvents Label6 As Label
     Friend WithEvents Button1 As Button
     Friend WithEvents Button2 As Button
+    Friend WithEvents Button4 As Button
+    Friend WithEvents Button3 As Button
 End Class

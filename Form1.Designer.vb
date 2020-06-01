@@ -129,6 +129,7 @@ Partial Class Form1
         'TextBox1
         '
         Me.TextBox1.BackColor = System.Drawing.SystemColors.ControlLightLight
+        Me.TextBox1.Font = New System.Drawing.Font("微软雅黑", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(134, Byte))
         Me.TextBox1.Location = New System.Drawing.Point(53, 32)
         Me.TextBox1.Multiline = True
         Me.TextBox1.Name = "TextBox1"
@@ -185,7 +186,7 @@ Partial Class Form1
         '
         'ToolStripComboBox1
         '
-        Me.ToolStripComboBox1.Items.AddRange(New Object() {"/v2para/it_Dictionary/", "/v2para/pubmodule/"})
+        Me.ToolStripComboBox1.Items.AddRange(New Object() {"/v2para/it_Dictionary/", "/v2para/cmcc_Dictionary", "/v2para/pubmodule/"})
         Me.ToolStripComboBox1.Name = "ToolStripComboBox1"
         Me.ToolStripComboBox1.Size = New System.Drawing.Size(210, 31)
         Me.ToolStripComboBox1.Text = "/"
@@ -481,6 +482,7 @@ Partial Class Form1
         'TextBox8
         '
         Me.TextBox8.BackColor = System.Drawing.SystemColors.ControlLightLight
+        Me.TextBox8.Font = New System.Drawing.Font("微软雅黑", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(134, Byte))
         Me.TextBox8.Location = New System.Drawing.Point(12, 23)
         Me.TextBox8.Multiline = True
         Me.TextBox8.Name = "TextBox8"
@@ -509,7 +511,7 @@ Partial Class Form1
         Me.TabPage1.Padding = New System.Windows.Forms.Padding(3)
         Me.TabPage1.Size = New System.Drawing.Size(857, 585)
         Me.TabPage1.TabIndex = 0
-        Me.TabPage1.Text = " 批量 FSU 文件更新 "
+        Me.TabPage1.Text = "  批量 FSU 文件更新  "
         Me.TabPage1.UseVisualStyleBackColor = True
         '
         'SplitContainer3
@@ -539,7 +541,7 @@ Partial Class Form1
         Me.TabPage2.Padding = New System.Windows.Forms.Padding(3)
         Me.TabPage2.Size = New System.Drawing.Size(857, 585)
         Me.TabPage2.TabIndex = 1
-        Me.TabPage2.Text = "FTP测试"
+        Me.TabPage2.Text = "  FTP测试  "
         Me.TabPage2.UseVisualStyleBackColor = True
         '
         'TextBox3
@@ -666,7 +668,7 @@ Partial Class Form1
         Me.TabPage3.Padding = New System.Windows.Forms.Padding(3)
         Me.TabPage3.Size = New System.Drawing.Size(857, 585)
         Me.TabPage3.TabIndex = 2
-        Me.TabPage3.Text = "Telnet测试"
+        Me.TabPage3.Text = "  Telnet测试  "
         Me.TabPage3.UseVisualStyleBackColor = True
         '
         'TextBox10

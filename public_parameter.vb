@@ -10,6 +10,9 @@ Module public_parameter
     Public Fsu_Telnet_Conn_User As String = "root"
     Public Fsu_Telnet_Conn_Pass As String = "netviewu"
 
+    Public Fsu_Ftp_login_Pass_new As String = "Zxm10*lwdhcp"
+    Public Fsu_Telnet_Conn_Pass_new As String = "Zxm10*netviewu"
+
     Public parameter_xml_file As String = Application.StartupPath & "\parameter_fsu.xml"
     Public key_str As String = "Q3Es5Z02"  'DES加解密密钥 key "Q3Es5Z02"
     Public iv_str As String = "pUy8G6M2"   'DES加解密初始化向量 IV "pUy8G6M2"
